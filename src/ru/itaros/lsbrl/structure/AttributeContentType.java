@@ -31,11 +31,12 @@ public enum AttributeContentType {
 	UINT64						(0x1A	,		8		),	
 	INT8						(0x1B	,		1		),	
 	STRING_LOCALIZED			(0x1C					),	
-	STRING_UTF16				(0x1D					),	
-	STRING_UTF16_PADDING		(0x1E					);	
+	STRING_UTF16				(0x1D	,		-1,2	),	
+	STRING_UTF16_PADDING		(0x1E	,		-1,2	);	
 	
 	private int typeid;
 	private int size=-1;
+	private int sizeMultiplier=1;
 	
 	//No predefined size
 	private AttributeContentType(int typeid){
@@ -45,8 +46,24 @@ public enum AttributeContentType {
 		this(typeid);
 		this.size=size;
 	}	
+	private AttributeContentType(int typeid, int size, int sizeMultiplier){
+		this(typeid,size);
+		this.sizeMultiplier=sizeMultiplier;
+	}		
 	
 	public int getID(){
 		return typeid;
+	}
+	public static AttributeContentType getByRecordType(int recordtype) {
+		for(AttributeContentType act:AttributeContentType.values()){
+			if(act.getID()==recordtype){return act;}
+		}
+		return null;
+	}
+	public int getSize() {
+		return size;
+	}
+	public int getSizeMultiplier() {
+		return sizeMultiplier;
 	}
 }

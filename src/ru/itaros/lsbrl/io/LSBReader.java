@@ -3,6 +3,7 @@ package ru.itaros.lsbrl.io;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import ru.itaros.lsbrl.utils.LSBLibException;
 import ru.itaros.lsbrl.utils.UnresolveableInheritanceException;
 
 public final class LSBReader extends LSBIO{
@@ -31,7 +32,7 @@ public final class LSBReader extends LSBIO{
 		}
 	}
 
-	public void fill() throws IOException, UnresolveableInheritanceException{
+	public void fill() throws IOException, UnresolveableInheritanceException, LSBLibException{
 		
 		decoder.decodeHeader(data);
 		decoder.decodeIdDict(data);

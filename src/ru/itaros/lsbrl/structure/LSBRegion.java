@@ -15,8 +15,8 @@ public class LSBRegion {
 	
 	
 	public LSBRegion(RandomAccessFile reader) throws IOException {
-		uint_key = (int) Unsigned.asUnsigned32(EndianHelper.fromReader(reader));
-		uint_dataOffset = (int) Unsigned.asUnsigned32(EndianHelper.fromReader(reader));
+		uint_key = (int) Unsigned.asUnsigned32(EndianHelper.intFromReader(reader));
+		uint_dataOffset = (int) Unsigned.asUnsigned32(EndianHelper.intFromReader(reader));
 	}
 	
 	public LSBRegion(long key, long dataOffset){

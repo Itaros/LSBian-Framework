@@ -5,6 +5,7 @@ import java.io.RandomAccessFile;
 
 import ru.itaros.lsbrl.io.LSBFragmentDecoder;
 import ru.itaros.lsbrl.utils.EndianHelper;
+import ru.itaros.lsbrl.utils.LSBLibException;
 import ru.itaros.lsbrl.utils.UnresolveableInheritanceException;
 
 public abstract class LSBEntry {
@@ -20,9 +21,9 @@ public abstract class LSBEntry {
 	}
 
 	public static LSBEntry createFromOffset(RandomAccessFile reader,
-			long filePointer, LSBIdDict iddict, LSBEntryType type) throws IOException, UnresolveableInheritanceException {
+			long filePointer, LSBIdDict iddict, LSBEntryType type) throws IOException, UnresolveableInheritanceException, LSBLibException {
 
-		int id = EndianHelper.fromReader(reader);
+		int id = EndianHelper.intFromReader(reader);
 		//LSBEntryType type = iddict.getType(id);
 		switch(type){
 		case ATTRIBUTE:

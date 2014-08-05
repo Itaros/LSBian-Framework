@@ -6,6 +6,10 @@ public class LSBLibException extends Exception {
 		super(string,e);
 	}
 
+	public LSBLibException(String string) {
+		super(string);
+	}
+
 	/**
 	 * 
 	 */

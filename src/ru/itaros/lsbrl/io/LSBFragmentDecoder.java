@@ -12,6 +12,7 @@ import ru.itaros.lsbrl.structure.LSBNodeEntry;
 import ru.itaros.lsbrl.structure.LSBReDict;
 import ru.itaros.lsbrl.structure.LSBRegion;
 import ru.itaros.lsbrl.utils.EndianHelper;
+import ru.itaros.lsbrl.utils.LSBLibException;
 import ru.itaros.lsbrl.utils.UnresolveableInheritanceException;
 import ru.itaros.lsbrl.utils.Unsigned;
 
@@ -37,7 +38,7 @@ public class LSBFragmentDecoder {
 	}
 	
 	private int readInt() throws IOException{
-		return EndianHelper.fromReader(reader);
+		return EndianHelper.intFromReader(reader);
 	}
 	
 	
@@ -80,7 +81,7 @@ public class LSBFragmentDecoder {
 	}
 
 	public static int peekAtID(RandomAccessFile reader) throws IOException{
-		int id = EndianHelper.fromReader(reader);
+		int id = EndianHelper.intFromReader(reader);
 		reader.seek(reader.getFilePointer()-4);//backstep
 		return id;
 	}
@@ -91,7 +92,7 @@ public class LSBFragmentDecoder {
 		dict.link(id,type);
 	}
 	
-	public void decodeData(LSBData data) throws IOException, UnresolveableInheritanceException {
+	public void decodeData(LSBData data) throws IOException, UnresolveableInheritanceException, LSBLibException {
 		if(offset_after_redict<0){throw new IllegalStateException("Can't read Data without Regions");}
 		//Moving pointer
 		reader.seek(offset_after_redict);	

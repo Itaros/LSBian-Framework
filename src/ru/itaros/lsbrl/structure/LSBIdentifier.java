@@ -18,13 +18,13 @@ public class LSBIdentifier {
 	 */
 	public LSBIdentifier(RandomAccessFile reader) throws IOException{
 		//Reading size
-		int size = (int) Unsigned.asUnsigned32(EndianHelper.fromReader(reader));
+		int size = (int) Unsigned.asUnsigned32(EndianHelper.intFromReader(reader));
 		//Extracting value
 		byte[] tvalue = new byte[size];
 		reader.read(tvalue);
 		ascii_value=new String(tvalue,"US-ASCII");
 		//Cutting required data off
-		uint_key = (int) Unsigned.asUnsigned32(EndianHelper.fromReader(reader));	
+		uint_key = (int) Unsigned.asUnsigned32(EndianHelper.intFromReader(reader));	
 	}
 	
 	/*

@@ -3,6 +3,9 @@ package ru.itaros.lsbrl.utils;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class EndianHelper {
 
@@ -22,9 +25,44 @@ public class EndianHelper {
 		
 		return buffer.getInt();
 	}
+	
 
-	public static int fromReader(RandomAccessFile reader) throws IOException {
+
+	public static byte[] flip(byte[] array) {
+	      if (array == null) {
+	          return null;
+	      }
+	      int i = 0;
+	      int j = array.length - 1;
+	      byte tmp;
+	      while (j > i) {
+	          tmp = array[j];
+	          array[j] = array[i];
+	          array[i] = tmp;
+	          j--;
+	          i++;
+	      }
+	      return array;
+	  }
+
+
+
+	public static int intFromReader(RandomAccessFile reader) throws IOException {
 		return flip(reader.readInt());
+	}
+	public static byte byteFromReader(RandomAccessFile reader) throws IOException {
+		return reader.readByte();
+	}	
+	
+	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+	public static String bytesToHex(byte[] bytes) {
+	    char[] hexChars = new char[bytes.length * 2];
+	    for ( int j = 0; j < bytes.length; j++ ) {
+	        int v = bytes[j] & 0xFF;
+	        hexChars[j * 2] = hexArray[v >>> 4];
+	        hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+	    }
+	    return new String(hexChars);
 	}
 	
 }
