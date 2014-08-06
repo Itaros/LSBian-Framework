@@ -37,6 +37,10 @@ public class LSBRegion {
 
 	public void attachEntry(LSBNodeEntry target) {
 		pointsTo=target;
+	}
+
+	public LSBEntry getRoot() {
+		return pointsTo;
 	}	
 	
 }

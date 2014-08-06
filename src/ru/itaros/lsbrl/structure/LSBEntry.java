@@ -24,16 +24,23 @@ public abstract class LSBEntry {
 			long filePointer, LSBIdDict iddict, LSBEntryType type) throws IOException, UnresolveableInheritanceException, LSBLibException {
 
 		int id = EndianHelper.intFromReader(reader);
-		//LSBEntryType type = iddict.getType(id);
+		
+		LSBEntry e=null;
 		switch(type){
 		case ATTRIBUTE:
-			return LSBAttributeEntry.createFromOffset(reader, filePointer, iddict);
+			e =  LSBAttributeEntry.createFromOffset(reader, filePointer, iddict);
+			break;
 		case NODE:
-			return LSBNodeEntry.createFromOffset(reader, filePointer, iddict);
+			e = LSBNodeEntry.createFromOffset(reader, filePointer, iddict);
+			break;
 		case UNKNOWN:
 			throw new IllegalStateException("Non-referenced data detected!");
 		}
-		throw new IllegalStateException("Non-unknown unknown type @_@");
+		if(e==null){
+			throw new IllegalStateException("Non-unknown unknown type @_@");
+		}
+		iddict.link(id, e);
+		return e;
 	}
 	
 }

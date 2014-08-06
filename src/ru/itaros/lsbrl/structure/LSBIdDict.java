@@ -36,6 +36,15 @@ public class LSBIdDict {
 		}
 		throw new UnresolveableInheritanceException();
 	}
+	public LSBIdentifier link(int id, LSBEntry entry) throws UnresolveableInheritanceException {
+		for(LSBIdentifier i:collection){
+			if(i.getID()==id){
+				i.setEntry(entry);
+				return i;
+			}
+		}
+		throw new UnresolveableInheritanceException();
+	}	
 
 
 	public LSBEntryType getType(int id) {
@@ -45,6 +54,26 @@ public class LSBIdDict {
 			}
 		}
 		return null;
+	}
+
+
+	public LSBIdentifier getIdentifier(int id) {
+		for(LSBIdentifier i:collection){
+			if(i.getID()==id){
+				return i;
+			}
+		}
+		return null;
+	}
+
+
+	public LSBIdentifier getIdentifier(String name) {
+		for(LSBIdentifier i:collection){
+			if(i.getName().equals(name)){
+				return i;
+			}
+		}
+		return null;		
 	}
 	
 	

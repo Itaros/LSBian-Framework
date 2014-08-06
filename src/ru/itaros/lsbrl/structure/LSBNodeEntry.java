@@ -3,6 +3,7 @@ package ru.itaros.lsbrl.structure;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ru.itaros.lsbrl.utils.EndianHelper;
 import ru.itaros.lsbrl.utils.LSBLibException;
@@ -42,4 +43,9 @@ public final class LSBNodeEntry extends LSBEntry {
 		
 	}
 
+	
+	public Iterator<LSBEntry> getChildIterator(){
+		return collection.iterator();
+	}
+	
 }

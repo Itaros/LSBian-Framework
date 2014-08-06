@@ -12,6 +12,7 @@ public class LSBIdentifier {
 	private long uint_key;
 	
 	private LSBEntryType type=LSBEntryType.UNKNOWN;
+	private LSBEntry entry;
 	
 	/*
 	 * From binary blob
@@ -50,6 +51,14 @@ public class LSBIdentifier {
 
 	public LSBEntryType getType() {
 		return type;
+	}
+
+	public void setEntry(LSBEntry entry) {
+		this.entry=entry;
+	}
+
+	public Object getName() {
+		return ascii_value;
 	}
 	
 	

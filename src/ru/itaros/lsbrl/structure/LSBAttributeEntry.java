@@ -42,10 +42,23 @@ public class LSBAttributeEntry extends LSBEntry {
 		//reading
 		ib = new byte[expectation];
 		reader.read(ib);
+		rawdata=ib;
 		//ib=EndianHelper.flip(ib);//There is no need to flip raw data
 		
 		
 		
+	}
+
+	public AttributeContentType getType() {
+		return type;
+	}
+
+	public int getDataSize() {
+		return rawdata.length;
+	}
+
+	public byte[] getRawData() {
+		return rawdata.clone();
 	}
 	
 }
