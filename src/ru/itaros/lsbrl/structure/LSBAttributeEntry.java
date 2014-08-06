@@ -30,6 +30,9 @@ public class LSBAttributeEntry extends LSBEntry {
 		if(type==null){
 			throw new LSBLibException("Unknown type encountered at "+reader.getFilePointer());
 		}
+		if(type==AttributeContentType.STRING_LOCALIZED){
+			throw new UnsupportedOperationException("STRING_LOCALIZED(occurence at "+reader.getFilePointer()+") datatype is not supported. I am sorry");
+		}
 		
 		byte[] ib;
 		int expectation = type.getSize();//static type
