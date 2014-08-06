@@ -20,7 +20,7 @@ public class DebugEntrypoint {
 	
 	public static void main(String[] args) throws LSBLibException {
 		
-		file = new FileDescriptor("testassets/umeta.lsb");
+		file = new FileDescriptor("testassets/mmeta.lsb");
 		LSBReader reader;
 		try{
 			reader = file.openToRead();
@@ -44,20 +44,22 @@ public class DebugEntrypoint {
 		System.out.println(group.getReport());
 		
 		//Testing data acquisition
-		System.out.println("\nPerforming testread of 'level' attribute:");
-		LSBEntry level = group.getByName("Level");
-		LSBAttributeEntry asA_Level = (LSBAttributeEntry)level;
-		byte[] raw = asA_Level.getRawData();
-		int size = asA_Level.getDataSize();
-		AttributeContentType type = asA_Level.getType();
-		
-		System.out.println("Level Attribute datatype: "+type.toString());
-		System.out.println("Level Attribute datasize: "+size);
-		//Performing encoding with blind assumption of STRING_UTF8_UINT32_3
-		try {
-			System.out.println("Level Attribute string: "+new String(raw,"UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			System.out.println(e.getMessage());
+		System.out.println("\nPerforming testread of 'name' attributes:");
+		LSBEntry[] levels = group.getByName("Name");
+		for(LSBEntry level:levels){
+			LSBAttributeEntry asA_Level = (LSBAttributeEntry)level;
+			byte[] raw = asA_Level.getRawData();
+			int size = asA_Level.getDataSize();
+			AttributeContentType type = asA_Level.getType();
+			
+			System.out.println("Level Attribute datatype: "+type.toString());
+			System.out.println("Level Attribute datasize: "+size);
+			//Performing encoding with blind assumption of STRING_UTF8_UINT32_3
+			try {
+				System.out.println("Level Attribute string: "+new String(raw,"UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 		
 		

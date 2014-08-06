@@ -58,14 +58,17 @@ public class LSBAssocGroup {
 	}
 
 	
-	public LSBEntry getByName(String name){
+	public LSBEntry[] getByName(String name){
+		ArrayList<LSBEntry> e = new ArrayList<LSBEntry>();
 		LSBIdentifier i = dict.getIdentifier(name);
 		for(LSBAssocPair p:pairs){
 			if(p.getIdentifier()==i){
-				return p.getEntry();
+				//return p.getEntry();
+				e.add(p.getEntry());
 			}
 		}
-		return null;
+		LSBEntry[] a = new LSBEntry[e.size()];
+		return e.toArray(a);
 	}
 	
 	
