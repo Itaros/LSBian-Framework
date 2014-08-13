@@ -36,6 +36,12 @@ public class LSBIdentifier {
 		uint_key=key;
 	}
 
+	public void write(RandomAccessFile writer) throws IOException{
+		writer.write(EndianHelper.flipBytewise(ascii_value.length()));
+		writer.write(ascii_value.getBytes("US-ASCII"));
+		writer.write(EndianHelper.flipBytewise((int) uint_key));
+	}
+	
 	@Override
 	public String toString() {
 		return "\""+uint_key+"\"="+ascii_value;

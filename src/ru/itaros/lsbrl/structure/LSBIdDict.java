@@ -1,6 +1,7 @@
 package ru.itaros.lsbrl.structure;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ru.itaros.lsbrl.utils.UnresolveableInheritanceException;
 
@@ -74,6 +75,16 @@ public class LSBIdDict {
 			}
 		}
 		return null;		
+	}
+
+
+	public int getSize() {
+		return collection.size();
+	}
+
+
+	public Iterator<LSBIdentifier> getIterator() {
+		return collection.iterator();
 	}
 	
 	

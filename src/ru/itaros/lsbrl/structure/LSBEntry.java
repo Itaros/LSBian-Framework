@@ -42,5 +42,9 @@ public abstract class LSBEntry {
 		iddict.link(id, e);
 		return e;
 	}
+
+	public void writeExpectations(RandomAccessFile writer) throws IOException {
+		writer.write(EndianHelper.flipBytewise((int) uint_identifier));
+	}
 	
 }

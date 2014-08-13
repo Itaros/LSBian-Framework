@@ -41,6 +41,17 @@ public class LSBRegion {
 
 	public LSBEntry getRoot() {
 		return pointsTo;
+	}
+
+	public long write(RandomAccessFile writer) throws IOException {
+		writer.write(EndianHelper.flipBytewise((int) uint_key));
+		long offset = writer.getFilePointer();
+		writer.write(EndianHelper.flipBytewise((int) 0));
+		return offset;
+	}
+
+	public void setOffset(long filePointer) {
+		uint_dataOffset=filePointer;	
 	}	
 	
 }

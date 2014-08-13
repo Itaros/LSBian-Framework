@@ -52,6 +52,31 @@ public class LSBAttributeEntry extends LSBEntry {
 		
 	}
 
+	
+	
+	
+	@Override
+	public void writeExpectations(RandomAccessFile writer) throws IOException {
+		super.writeExpectations(writer);
+		
+		writer.write(EndianHelper.flipBytewise((int) type.ordinal()));
+		
+		//Evaluating if size is dynamic xD
+		if(type.getSize()<=0){
+			//Dynamic
+			writer.write(EndianHelper.flipBytewise((int) rawdata.length*type.getSizeMultiplier()));
+			//Datadump
+			writer.write(rawdata);
+		}else{
+			//Static
+			if(rawdata.length!=type.getSize()){
+				throw new IOException("Faulty rawdata size expectations!");
+			}
+			writer.write(rawdata);
+		}
+		
+	}
+
 	public AttributeContentType getType() {
 		return type;
 	}

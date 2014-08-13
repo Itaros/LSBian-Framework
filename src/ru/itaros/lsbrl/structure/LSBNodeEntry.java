@@ -47,5 +47,23 @@ public final class LSBNodeEntry extends LSBEntry {
 	public Iterator<LSBEntry> getChildIterator(){
 		return collection.iterator();
 	}
+
+	public void writeExpectations(RandomAccessFile writer) throws IOException{
+		super.writeExpectations(writer);
+		//Counting
+		int attributes=0;
+		int nodes=0;
+		for(LSBEntry e:collection){
+			if(e instanceof LSBAttributeEntry){
+				attributes++;
+			}
+			if(e instanceof LSBNodeEntry){
+				nodes++;
+			}			
+		}
+		//Writing
+		writer.write(EndianHelper.flipBytewise(attributes));
+		writer.write(EndianHelper.flipBytewise(nodes));
+	}
 	
 }

@@ -1,15 +1,18 @@
 package ru.itaros.lsbrl.debug;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import ru.itaros.lsbrl.io.FileDescriptor;
 import ru.itaros.lsbrl.io.LSBReader;
+import ru.itaros.lsbrl.io.LSBWriter;
 import ru.itaros.lsbrl.structure.AttributeContentType;
 import ru.itaros.lsbrl.structure.LSBAttributeEntry;
 import ru.itaros.lsbrl.structure.LSBData;
 import ru.itaros.lsbrl.structure.LSBEntry;
 import ru.itaros.lsbrl.structure.convenience.LSBAssocGroup;
 import ru.itaros.lsbrl.utils.LSBLibException;
+import ru.itaros.lsbrl.utils.UnresolveableInheritanceException;
 
 public class DebugEntrypoint {
 
@@ -61,6 +64,20 @@ public class DebugEntrypoint {
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		
+		//Testing Writing Capabilities
+		
+		file = new FileDescriptor("validation.lsb");
+		LSBWriter writer;
+		
+		try {
+			writer = file.openToWrite(data);
+			writer.fill();
+			writer.close();
+		} catch (Exception e) {
+			throw new LSBLibException("Failed to write file",e);
+		}		
 		
 		
 	}

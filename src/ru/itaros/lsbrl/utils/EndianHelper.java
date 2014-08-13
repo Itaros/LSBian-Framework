@@ -26,7 +26,19 @@ public class EndianHelper {
 		return buffer.getInt();
 	}
 	
-
+	public static byte[] flipBytewise(int source){
+		buffer.clear();
+		buffer.putInt(source);
+		buffer.flip();
+		byte[] b = buffer.array();
+		byte[] b2 = b.clone();
+		//Flip \o/
+		for(int i = 0;i<b.length;i++){
+			b[i]=b2[b.length-1-i];
+		}
+		
+		return buffer.array().clone();	
+	}
 
 	public static byte[] flip(byte[] array) {
 	      if (array == null) {

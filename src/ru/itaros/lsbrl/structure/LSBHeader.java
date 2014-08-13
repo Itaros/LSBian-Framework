@@ -50,6 +50,22 @@ public class LSBHeader {
 		}
 		return b.toString();
 	}
+
+	public int[] wrapRaw() {
+		int[] raws = new int[10];
+
+		raws[0]		=	(int)uint_header;
+		raws[1]		=	(int)uint_fileLength;
+		raws[2]		=	(int)uint_endianess;
+		raws[3]		=	(int)uint_unknownFlag;
+		raws[4]								=	-1;//Unsigned.asUnsigned32(raws[4]);//INVALID UINT64
+		raws[6]		=	(int) uint_version_major;
+		raws[7]		=	(int)uint_version_minor;
+		raws[8]		=	(int)uint_version_build;
+		raws[9]		=	(int)uint_version_revision;
+		
+		return raws;
+	}
 	
 	
 	

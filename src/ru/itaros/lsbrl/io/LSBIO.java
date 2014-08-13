@@ -7,6 +7,9 @@ public abstract class LSBIO {
 	protected LSBIO(){
 		initLSBData();
 	}
+	protected LSBIO(LSBData data){
+		this.data=data;
+	}	
 	
 	private boolean isReady=false;
 	
